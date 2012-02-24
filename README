@@ -1,0 +1,7 @@
+(main-page
+ ("http://www.udacity.com/overview/Course/cs373"))
+(forums
+ ("http://www.udacity-forums.com/cs373/"))
+(irc
+ ("webchat.freenode.net/?randomnick=1&channels=udacity-cs373&uio=d4"
+  "webchat.freenode.net/?randomnick=1&channels=udacity&uio=d4"))
