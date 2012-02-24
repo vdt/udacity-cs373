@@ -35,4 +35,4 @@ def move(p, U):
 # ADD CODE HERE
 #
 
-print move(p,1)
+print move(move(p,1),1)
