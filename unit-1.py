@@ -1,11 +1,15 @@
 #! /usr/bin/env python
 
-#write code that moves 1000 times and then prints the 
-#resulting probability distribution.
+#Given the list motions=[1,1] which means the robot 
+#moves right and then right again, compute the posterior 
+#distribution if the robot first senses red, then moves 
+#right one, then senses green, then moves right again, 
+#starting with a uniform prior distribution.
 
-p=[0, 1, 0, 0, 0]
+p=[0.2, 0.2, 0.2, 0.2, 0.2]
 world=['green', 'red', 'red', 'green', 'green']
 measurements = ['red', 'green']
+motions = [1,1]
 pHit = 0.6
 pMiss = 0.2
 pExact = 0.8
