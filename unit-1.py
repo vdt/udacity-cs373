@@ -37,4 +37,7 @@ def move(p, U):
 #
 # ADD CODE HERE
 #
+for (motion, measurement) in zip(motions, measurements):
+    p = sense(p, measurement)
+    p = move(p, motion)
 print p         
