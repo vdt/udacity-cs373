@@ -10,6 +10,6 @@ def f(n):
     #
     # Insert code here
     #
-    return
+    return (n - 1) * 4 / 5;
 
 print f(96.)
