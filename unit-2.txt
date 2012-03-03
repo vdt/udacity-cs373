@@ -18,8 +18,15 @@
    (measurements and movements)
    (question-answer
     (question
-     (measurement requires product or convolution)
-     (movement requires convolution or product))
+     (measurement requires product or convolution?)
+     (movement requires convolution or product?))
     (answer
-     (?)
-     (?))))))
+     (product)
+     (convolution)))))
+ (15 measurement and motion 2
+  (question-answer
+   (bayes rule and total probability)
+   (question-answer
+    (question
+     (measurement requires bayes rule and/or total probability?)
+     (motion requires bayes rule and/or total probability?))))))
