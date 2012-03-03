@@ -15,5 +15,7 @@ def is_int(n):
     return abs(n-int(n)) < 0.0000001
    
 # Enter code here.
-
+n = 0
+while not is_int(f6(n)):
+    n += 1
 print n
