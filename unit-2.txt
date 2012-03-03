@@ -12,3 +12,14 @@
   (measure of relation between x and y))
  (mu aka mean
   (center of spread)))
+(unit 2
+ (14 measurement and motion 1
+  (kalman filter
+   (measurements and movements)
+   (question-answer
+    (question
+     (measurement requires product or convolution)
+     (movement requires convolution or product))
+    (answer
+     (?)
+     (?))))))
