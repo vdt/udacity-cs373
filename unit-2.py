@@ -1,15 +1,18 @@
 #! /usr/bin/env python
 
-#Write a function that takes the number of 
-#coconuts, n, as an argument and returns the
-#number of coconuts after one is given to
-#the monkey and one fifth are taken away.
+#Write a function that repeats the process of
+#giving a coconut away and then taking one 
+#fifth of the remaining coconuts away.
 
 
 def f(n):
-    #
-    # Insert code here
-    #
-    return (n - 1) * 4 / 5;
+    return (n-1) / 5 * 4
 
-print f(96.)
+def f6(n):
+    
+    # Enter code here
+    
+    return 
+    
+
+print f6(96.)
