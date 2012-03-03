@@ -11,8 +11,10 @@ def f(n):
 def f6(n):
     
     # Enter code here
+    for i in range(6):
+        n = f(n)
     
-    return 
+    return n
     
 
 print f6(96.)
