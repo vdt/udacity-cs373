@@ -33,4 +33,4 @@
                #:when (start-with-n-coconuts? n))
        n))
 
-(print "start cocunut count = ~v\n" start-coconut-count)
+(printf "start cocunut count = ~v\n" (start-coconut-count))
