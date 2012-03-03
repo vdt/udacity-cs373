@@ -1,0 +1,14 @@
+(tracking
+ (kalman filter
+  (continuous)
+  (uni-modal))
+ (monte-carlo
+  (discrete)
+  (multi-modal)))
+(gaussian
+ (sigma-square aka variance
+  (measure of uncertainty)
+  (measure of width)
+  (measure of relation between x and y))
+ (mu aka mean
+  (center of spread)))
