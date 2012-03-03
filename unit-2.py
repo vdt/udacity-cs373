@@ -1,20 +1,19 @@
 #! /usr/bin/env python
 
-#Write a function that repeats the process of
-#giving a coconut away and then taking one 
-#fifth of the remaining coconuts away.
-
+#Write a program that will find the initial number
+#of coconuts. 
 
 def f(n):
-    return (n-1) / 5 * 4
+    return (n-1) / 5.0 * 4
 
 def f6(n):
-    
-    # Enter code here
     for i in range(6):
         n = f(n)
-    
-    return n
-    
+    return n 
 
-print f6(96.)
+def is_int(n):
+    return abs(n-int(n)) < 0.0000001
+   
+# Enter code here.
+
+print n
