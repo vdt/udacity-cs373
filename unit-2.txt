@@ -111,4 +111,15 @@
       (closer to the prior)
       (in between)
       (closer to the measure)
-      (beyond the measure a little bit))?)))))
+      (beyond the measure a little bit))?))
+   (answer
+    (it's in the middle
+     (because the varainces are the same, so just average the means)))))
+ (21 separated gaussians 2
+  (hard question)
+  (question-answer
+   (question
+    (will it the variance of the new gaussian be
+     (smaller)
+     (same size)
+     (larger))?))))
