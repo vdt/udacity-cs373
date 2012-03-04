@@ -47,4 +47,7 @@
      higher mean and a smaller variance?
      (same as old mean?)
      (between old and new mean?)
-     (higher than the new mean?))))))
+     (higher than the new mean?)))
+   (answer
+    (in between the two means
+     (slightly closer to the new mean, since its covariance is smaller))))))
