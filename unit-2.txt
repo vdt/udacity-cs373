@@ -57,4 +57,29 @@
     (where should the peak be after this measuring?
      (higher than the measurement peak?)
      (in between the measurement peak and the old peak?)
-     (below both peaks?))))))
+     (below both peaks?)))
+   (answer
+    (higher than the new peak
+     (the resulting gaussian is more certain than the
+      component guassians)
+     (the two gaussians together have a higher information content)))))
+ (18 parameter update
+  (suppose we multiply two guassians as in bayes rule
+   (prior mu and sigma-square)
+   (measurement nu and r-square)
+   (result mu-prime and sigma-square-prime)
+   (result given by:
+    (= mu-prime
+       (/ (+ (* r-square mu) (* sigma-square nu))
+          (+ r-square mu-square)))
+    (= sigma-sqaure-prime
+       (/ 1 (+ (/ 1 sigma-square)
+               (/ 1 r-square)))))
+   (question-answer
+    (question
+     (suppose we have
+      (= mu 10)
+      (= nu 12)
+      (= sigma-square 4)
+      (= r-square 4))
+     (what are mu-prime and sigma-square-prime?))))))
