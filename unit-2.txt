@@ -101,4 +101,14 @@
      (what are mu-prime and sigma-square-prime?))
     (answer
      (= mu-prime 62/5)
-     (= sigma-square-prime 8/5))))))
+     (= sigma-square-prime 8/5)))))
+ (20 separated gaussians
+  (question-answer
+   (question
+    (suppose we have a prior and measurement that are reaally far apar
+     from each other
+     (will the new mean be
+      (closer to the prior)
+      (in between)
+      (closer to the measure)
+      (beyond the measure a little bit))?)))))
