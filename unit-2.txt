@@ -147,4 +147,7 @@
      (= sigma-square 4)
      (= nu 10)
      (= r-square 6)
-     what's the value of mu-prime and sigma-square-prime)?))))
+     what's the value of mu-prime and sigma-square-prime)?)
+   (answer
+    (= mu-prime (+ mu nu) (+ 8 10) 18)
+    (= sigma-square-prime (+ sigma-square r-square) (+ 4 6) 10)))))
