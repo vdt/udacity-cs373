@@ -98,4 +98,7 @@
       (= nu 13)
       (= sigma-square 8)
       (= r-square 2))
-     (what are mu-prime and sigma-square-prime?))))))
+     (what are mu-prime and sigma-square-prime?))
+    (answer
+     (= mu-prime 62/5)
+     (= sigma-square-prime 8/5))))))
