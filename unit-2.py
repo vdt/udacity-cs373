@@ -1,21 +1,14 @@
 #! /usr/bin/env python
 
-#Write a program that will find the initial number
-#of coconuts. 
+# Write a program to update your mean and variance
+# when given the mean and variance of your belief
+# and the mean and variance of your measurement.
+# This program will update the parameters of your
+# belief function.
 
-def f(n):
-    return (n-1) / 5.0 * 4
+def update(mean1, var1, mean2, var2):
+    new_mean =
+    new_var =
+    return [new_mean, new_var]
 
-def f6(n):
-    for i in range(6):
-        n = f(n)
-    return n 
-
-def is_int(n):
-    return abs(n-int(n)) < 0.0000001
-   
-# Enter code here.
-n = 0
-while not is_int(f6(n)):
-    n += 1
-print n
+print update(10.,8.,13., 2.)
