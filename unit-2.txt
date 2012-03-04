@@ -125,4 +125,26 @@
      (larger))?)
    (answer
     (smaller variance
-     (more peaky gaussian))))))
+     (more peaky gaussian)))))
+ (22 gaussian motion
+  (step back and look at what we achieved:
+   (measure ment update
+    (bayes rule)
+    (multiplication))
+   (motion update aka prediction
+    (total probability)
+    (addition)
+    (really really easy step
+     (start somewhere, move with some uncertainty
+      (= mu-prime (+ mu nu))
+      (= sigma-square-prime (+ sigma-square r-square))
+      (r-square is motion uncertainty, aka variance)
+      (nu is most likely motion)))))
+  (question-answer
+   (question
+    (suppose we have
+     (= mu 8)
+     (= sigma-square 4)
+     (= nu 10)
+     (= r-square 6)
+     what's the value of mu-prime and sigma-square-prime)?))))
