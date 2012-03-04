@@ -165,4 +165,10 @@
    (question-answer
     (question
      (suppose you see object going up and to the right)
-     (where do you expect to see it next?))))))
+     (where do you expect to see it next?))
+    (answer
+     (up and to the right about the same distance as it traveled before)
+     (kalman filter allows you to implicitly estimate velocity)
+     (sensor only sees position)
+     (can predict future position)
+     (really really really great))))))
