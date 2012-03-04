@@ -150,4 +150,7 @@
      what's the value of mu-prime and sigma-square-prime)?)
    (answer
     (= mu-prime (+ mu nu) (+ 8 10) 18)
-    (= sigma-square-prime (+ sigma-square r-square) (+ 4 6) 10)))))
+    (= sigma-square-prime (+ sigma-square r-square) (+ 4 6) 10))))
+ (25 kalman filter code
+  (let's do it!  put into practice some measurements and motions
+   (first update based on measurement, then on motion))))
