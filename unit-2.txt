@@ -189,4 +189,15 @@
      (t=4, predict x=4)
      you can infer from discrete locations a velocity)
     (how does kalman filter address this?
-     (this is the true beauty of kalman filter))))))
+     (this is the true beauty of kalman filter)))))
+ (28 kalman filter prediction
+  (build 2-D estimate for 1-D prior example
+   (1 d for position)
+   (1 d for velocity)
+   (if i know my initial position and not my velocity,
+    have elongated gaussian elongated along velocity dimension)
+   (there is a startling correlation between velocity and dimension))
+  (question-answer
+   (question
+    (assume velocity 1 and position 1,
+     where would the gaussian be centered in the next time step)?))))
