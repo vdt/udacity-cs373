@@ -208,4 +208,23 @@
    (question
     (consider velocity of 2, where would we expect next location to be)?)
    (answer
-    (position 3, velocity 2)))))
+    (position 3, velocity 2))))
+ (30 more kalman filters
+  (gaussian from previous 2 videos has interesting property
+   (x and y are highly correlated)
+   (can't predict from single observation
+    (location)
+    (velocity))
+   (but if we get another location,
+    this gaussian gives us the velocity)
+   (if we get our velocity,
+    this gaussian gives us the location)
+   (we've learned a lot about the relation between location and velocity))
+  (big lesson
+   (kalman filter states
+    (observables
+     (position))
+    (hidden
+     (velocity))
+    (from multiple observations, we can estimate hidden)))))
+
