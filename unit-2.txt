@@ -82,4 +82,10 @@
       (= nu 12)
       (= sigma-square 4)
       (= r-square 4))
-     (what are mu-prime and sigma-square-prime?))))))
+     (what are mu-prime and sigma-square-prime?))
+    (answer
+     (mu-prime is 11
+      (since both weights are equal, it's just half way in between))
+     (sigma-square-prime is 2
+      (information content from both gaussians doubles,
+       so resulting guassian width halves)))))))
