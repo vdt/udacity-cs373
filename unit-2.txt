@@ -206,4 +206,6 @@
  (29 another prediction
   (question-answer
    (question
-    (consider velocity of 2, where would we expect next location to be)?))))
+    (consider velocity of 2, where would we expect next location to be)?)
+   (answer
+    (position 3, velocity 2)))))
