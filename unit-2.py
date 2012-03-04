@@ -25,5 +25,18 @@ sig = 10000
 #and the variance in a list [mu, sig]. 
 
 # Insert code here
+def step(mu, sig, measurement, motion):
+    mu, sig, measurement, motion =\
+        [float(mu), float(sig), float(measurement), float(motion)]
+    mu, sig = update(mu, sig, measurement, measurement_sig)
+    mu, sig = predict(mu, sig, motion, motion_sig)
+    return [mu, sig]
+
+def all_steps(mu, sig, measurements, motions):
+    for measurement, motion in zip(measurements, motions):
+        mu, sig = step(mu, sig, measurement, motion)
+    return [mu, sig]
+
+mu, sig = all_steps(mu, sig, measurements, motion)
 
 print [mu, sig]

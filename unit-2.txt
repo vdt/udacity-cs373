@@ -153,4 +153,5 @@
     (= sigma-square-prime (+ sigma-square r-square) (+ 4 6) 10))))
  (25 kalman filter code
   (let's do it!  put into practice some measurements and motions
-   (first update based on measurement, then on motion))))
+   (first update based on measurement, then on motion)
+   (this is full kalman filter in 1D))))
