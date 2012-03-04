@@ -171,4 +171,22 @@
      (kalman filter allows you to implicitly estimate velocity)
      (sensor only sees position)
      (can predict future position)
-     (really really really great))))))
+     (really really really great)))))
+ (27 kalman filter land
+  (multivariate gaussians aka high dimension gaussian
+   (mean is now a vector with an element per dimension)
+   (variance is a matrix with D rows and D columns,
+    where dimensionality = D)
+   (there's a formula, but don't worry about it)
+   (you can draw the contour lines of the gaussian
+    (if it's tilted, then dimensions are correlated,
+     getting information about x gives you an estimate for y))
+   (1-D motion example
+    (when
+     (t=1, x=1)
+     (t=2, x=2)
+     (t=3, x=3)
+     (t=4, predict x=4)
+     you can infer from discrete locations a velocity)
+    (how does kalman filter address this?
+     (this is the true beauty of kalman filter))))))
