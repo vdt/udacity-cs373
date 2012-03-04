@@ -154,4 +154,15 @@
  (25 kalman filter code
   (let's do it!  put into practice some measurements and motions
    (first update based on measurement, then on motion)
-   (this is full kalman filter in 1D))))
+   (this is full kalman filter in 1D)))
+ (26 kalman prediction
+  (1D-kalman filter
+   (you've programmed one)
+   (incorporated motion, measurement))
+  (many Ds
+   (suppose you have 2D state space, like camera image)
+   (2D-kalman filter affords you something amazing)
+   (question-answer
+    (question
+     (suppose you see object going up and to the right)
+     (where do you expect to see it next?))))))
