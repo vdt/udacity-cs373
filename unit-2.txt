@@ -88,4 +88,14 @@
       (since both weights are equal, it's just half way in between))
      (sigma-square-prime is 2
       (information content from both gaussians doubles,
-       so resulting guassian width halves)))))))
+       so resulting guassian width halves))))))
+ (19 parameter update 2
+  (let's DO THIS!!! again
+   (question-answer
+    (question
+     (suppose we have
+      (= mu 10)
+      (= nu 13)
+      (= sigma-square 8)
+      (= r-square 2))
+     (what are mu-prime and sigma-square-prime?))))))
