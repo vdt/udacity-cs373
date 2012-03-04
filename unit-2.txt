@@ -50,4 +50,11 @@
      (higher than the new mean?)))
    (answer
     (in between the two means
-     (slightly closer to the new mean, since its covariance is smaller))))))
+     (slightly closer to the new mean, since its covariance is smaller)))))
+ (17 predicting the peak
+  (question-answer
+   (question
+    (where should the peak be after this measuring?
+     (higher than the measurement peak?)
+     (in between the measurement peak and the old peak?)
+     (below both peaks?))))))
