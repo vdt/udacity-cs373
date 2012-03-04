@@ -122,4 +122,7 @@
     (will it the variance of the new gaussian be
      (smaller)
      (same size)
-     (larger))?))))
+     (larger))?)
+   (answer
+    (smaller variance
+     (more peaky gaussian))))))
