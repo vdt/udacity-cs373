@@ -32,4 +32,19 @@
      (motion requires bayes rule and/or total probability?))
     (answer
      (measurement requires bayes rule)
-     (motion requires total probability))))))
+     (motion requires total probability)))))
+ (16 shifting the mean
+  (kalman filters
+   (measurement update
+    (bayes rule)
+    (product))
+   (prediction
+    (total probability)
+    (convolution)))
+  (question-answer
+   (question
+    (where will the new mean be after a measurement that has a
+     higher mean and a smaller variance?
+     (same as old mean?)
+     (between old and new mean?)
+     (higher than the new mean?))))))
