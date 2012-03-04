@@ -200,4 +200,6 @@
   (question-answer
    (question
     (assume velocity 1 and position 1,
-     where would the gaussian be centered in the next time step)?))))
+     where would the gaussian be centered in the next time step)?)
+   (answer
+    (predict position 2, velocity 1)))))
