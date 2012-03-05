@@ -226,5 +226,34 @@
      (position))
     (hidden
      (velocity))
-    (from multiple observations, we can estimate hidden)))))
+    (from multiple observations, we can estimate hidden))))
+ (31 kalman filter design
+  (design kf
+   (need 2 things
+    (for state
+     (need state transition function
+      (usually matrix
+       (example ((1 1)
+                 (0 1)) multiply this matrix by vector (position velocity)))))
+    (for measurements
+     (need measurement function
+      (example (new-location = old-location + velocity after timestep))
+       called H))))
+  (update
+   (prediction
+    (x = esitmate)
+    (P = uncertainty covariance)
+    (F = state transition matrix)
+    (u = motion vector)
+    (x-prime = F x + mu)
+    (p-prime = F dot P dot F-transpose))
+   (measurement update
+    (z = measurement)
+    (H = measurement function)
+    (R = measurement noise)
+    (y = z - H * x)
+    (S = H dot P dot H-transpose + R)
+    (K = P dot H-transpose dot S-inverse (called "kalman gain"))
+    (x-prime = x + (K dot y))
+    (P-prime = (I - K dot H) dot P)))))
 
