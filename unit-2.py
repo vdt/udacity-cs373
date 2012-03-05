@@ -142,13 +142,29 @@ class matrix:
 ########################################
 
 # Implement the filter function below
+def measure(measurement, x, P, H, R):
+    y = measurement - H * x
+    S = H * P * H.transpose() + R
+    # kalman gain:
+    K = P * H.transpose() * S.inverse()
+    x_prime = x + (K * y)
+    P_prime = (I - K * H) * P
+    return [x_prime, P_prime]
+
+def predict(x, P, F, u):
+    x_prime = F * x + u
+    P_prime = F * P * F.transpose()
+    return [x_prime, P_prime]
 
 def filter(x, P):
     for n in range(len(measurements)):
+        measurement = matrix([[float(measurements[n])]])
         
         # measurement update
+        x, P = measure(measurement, x, P, H, R)
         
         # prediction
+        x, P = predict(x, P, F, u)
 
         print 'x= '
         x.show()
