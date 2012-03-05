@@ -143,10 +143,12 @@ class matrix:
 
 # Implement the filter function below
 def measure(measurement, x, P, H, R):
+    # error calculation
     y = measurement - H * x
     S = H * P * H.transpose() + R
     # kalman gain:
     K = P * H.transpose() * S.inverse()
+    # measurement step:
     x_prime = x + (K * y)
     P_prime = (I - K * H) * P
     return [x_prime, P_prime]
