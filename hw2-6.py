@@ -184,11 +184,22 @@ u = matrix([[0.], [0.], [0.], [0.]]) # external motion
 #### DO NOT MODIFY ANYTHING ABOVE HERE ####
 #### fill this in, remember to use the matrix() function!: ####
 
-P =  # initial uncertainty
-F =  # next state function
-H =  # measurement function
-R =  # measurement uncertainty
-I =  # identity matrix
+# initial uncertainty
+P =
+# next state function
+F = matrix([[1., 0., 1., 0.],
+            [0., 1., 0., 1.],
+            [0., 0., 1., 0.],
+            [0., 0., 0., 1.]])
+# measurement function
+H =
+# measurement uncertainty
+R =
+# identity matrix
+I = matrix([[1., 0., 0., 0.],
+            [0., 1., 0., 0.],
+            [0., 0., 1., 0.],
+            [0., 0., 0., 1.]])
 
 ###### DO NOT MODIFY ANYTHING HERE #######
 
