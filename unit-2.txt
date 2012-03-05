@@ -241,7 +241,7 @@
        called H))))
   (update
    (prediction
-    (x = esitmate)
+    (x = estimate)
     (P = uncertainty covariance)
     (F = state transition matrix)
     (u = motion vector)
@@ -255,5 +255,14 @@
     (S = H dot P dot H-transpose + R)
     (K = P dot H-transpose dot S-inverse (called "kalman gain"))
     (x-prime = x + (K dot y))
-    (P-prime = (I - K dot H) dot P)))))
+    (P-prime = (I - K dot H) dot P))))
+ (32 kalman matrices
+  (challenging programming assignment, should take a while)
+  (implement multi-d kalman filter)
+  (matrix class
+   (initializing matrices)
+   (inverse)
+   (multiplication)
+   (show))
+  (do measurement/observation first, then do prediction)))
 
