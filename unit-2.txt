@@ -264,5 +264,7 @@
    (inverse)
    (multiplication)
    (show))
-  (do measurement/observation first, then do prediction)))
+  (do measurement/observation first, then do prediction))
+ (33 the next class
+  (learn how to program a particle filter)))
 
