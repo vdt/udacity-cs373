@@ -10,3 +10,8 @@ print "say we have a prior gaussian, mu, sigma-square"
 print "and a measurement gaussian with same parameters."
 print "what will covariance of new gaussian be after multiplying these?"
 print "new sigma-square will be half of old sigma-square"
+
+# question 3
+print "is it possible to have a heavytail gaussian using"
+print " the standard gaussian formula and changing mu and sigma?"
+print "no"
