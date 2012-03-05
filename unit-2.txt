@@ -266,5 +266,8 @@
    (show))
   (do measurement/observation first, then do prediction))
  (33 the next class
-  (learn how to program a particle filter)))
+  (learn how to program a particle filter))
+ (34 conclusion
+  (ace the hw!)
+  (next week: particle filters, third way to estimate state)))
 
