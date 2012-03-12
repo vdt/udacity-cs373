@@ -138,3 +138,10 @@ for i in range(N):
 # Also, DO NOT MODIFY p.
 
 p3 = []
+for p3_index in range(len(p)):
+    w_index = 0
+    r = random.random() * sum(w)
+    while w[w_index] < r:
+        r -= w[w_index]
+        w_index += 1
+    p3.append(p[w_index])
