@@ -132,6 +132,13 @@ for i in range(N):
     w.append(p[i].measurement_prob(Z))
 
 p3 = []
-
+w_index = int(random.random() * len(p))
+beta = 0
+for i in range(len(p)):
+    beta += random.random() * 2 * max(w)
+    while w[w_index] <= beta:
+        beta -= w[w_index]
+        w_index = (w_index + 1) % len(w)
+    p3.append(p[w_index])
 p = p3
 print p #please leave this print statement here for grading!
