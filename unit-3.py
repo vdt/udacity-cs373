@@ -134,4 +134,5 @@ p = p2
 
 w = []
 #insert code here!
+w = [p[i].measurement_prob(myrobot.sense()) for i in range(len(p))]
 print w #Please print w for grading purposes.
