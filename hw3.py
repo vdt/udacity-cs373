@@ -15,3 +15,7 @@ print "never stays in same cell"
 print "after 1 step, how many do we expect in each cell,"
 print "given we start with [[5 3] [3 1]]?"
 print "also what do we expect after infinite steps?"
+print "A = .5 * 3 + .5 * 3 = ", .5 * 3 + .5 * 3
+print "B = .5 * 5 + .5 * 1 = ", .5 * 5 + .5 * 1
+print "C = .5 * 1 + .5 * 5 = ", .5 * 1 + .5 * 5
+print "D = .5 * 3 + .5 * 5 = ", .5 * 3 + .5 * 3
