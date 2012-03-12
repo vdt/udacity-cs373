@@ -1,7 +1,6 @@
 #! /usr/bin/env python
 
-# In this exercise, write a program that will
-# run your previous code twice.
+# In this exercise, please run your previous code twice.
 # Please only modify the indicated area below!
 
 from math import *
@@ -115,15 +114,19 @@ def eval(r, p):
 myrobot = robot()
 myrobot = myrobot.move(0.1, 5.0)
 Z = myrobot.sense()
-
 N = 1000
+T = 10 #Leave this as 10 for grading purposes.
+
 p = []
 for i in range(N):
-    x = robot()
-    x.set_noise(0.05, 0.05, 5.0)
-    p.append(x)
+    r = robot()
+    r.set_noise(0.05, 0.05, 5.0)
+    p.append(r)
 
-for i in [1,2]:
+for t in range(T):
+    myrobot = myrobot.move(0.1, 5.0)
+    Z = myrobot.sense()
+
     p2 = []
     for i in range(N):
         p2.append(p[i].move(0.1, 5.0))
@@ -144,5 +147,5 @@ for i in [1,2]:
             index = (index + 1) % N
         p3.append(p[index])
     p = p3
-
-print p #Leave this print statement for grading purposes!
+    #enter code here, make sure that you output 10 print statements.
+    print 
