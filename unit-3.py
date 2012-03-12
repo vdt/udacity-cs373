@@ -1,7 +1,8 @@
 #! /usr/bin/env python
 
-# In this exercise, you should implement the
-# resampler shown in the previous video.
+# In this exercise, write a program that will
+# run your previous code twice.
+# Please only modify the indicated area below!
 
 from math import *
 import random
@@ -110,7 +111,7 @@ def eval(r, p):
 #myrobot = myrobot.move(-pi/2, 10.0)
 #print myrobot.sense()
 
-####   DON'T MODIFY ANYTHING ABOVE HERE! ENTER CODE BELOW ####
+####   DON'T MODIFY ANYTHING ABOVE HERE! ENTER/MODIFY CODE BELOW ####
 myrobot = robot()
 myrobot = myrobot.move(0.1, 5.0)
 Z = myrobot.sense()
@@ -132,13 +133,15 @@ for i in range(N):
     w.append(p[i].measurement_prob(Z))
 
 p3 = []
-w_index = int(random.random() * len(p))
-beta = 0
-for i in range(len(p)):
-    beta += random.random() * 2 * max(w)
-    while w[w_index] <= beta:
-        beta -= w[w_index]
-        w_index = (w_index + 1) % len(w)
-    p3.append(p[w_index])
+index = int(random.random() * N)
+beta = 0.0
+mw = max(w)
+for i in range(N):
+    beta += random.random() * 2.0 * mw
+    while beta > w[index]:
+        beta -= w[index]
+        index = (index + 1) % N
+    p3.append(p[index])
 p = p3
-print p #please leave this print statement here for grading!
+
+print p #Leave this print statement for grading purposes!
