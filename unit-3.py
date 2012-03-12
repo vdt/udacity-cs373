@@ -148,4 +148,4 @@ for t in range(T):
         p3.append(p[index])
     p = p3
     #enter code here, make sure that you output 10 print statements.
-    print 
+    print eval(myrobot, p)
