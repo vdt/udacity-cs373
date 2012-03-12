@@ -1,10 +1,8 @@
 #! /usr/bin/env python
 
-# Now we want to simulate robot
-# motion with our particles.
-# Each particle should turn by 0.1
-# and then move by 5. 
-#
+# Now we want to give weight to our 
+# particles. This program will print a
+# list of 1000 particle weights.
 #
 # Don't modify the code below. Please enter
 # your code at the bottom.
@@ -118,11 +116,22 @@ def eval(r, p):
 #print myrobot.sense()
 
 ####   DON'T MODIFY ANYTHING ABOVE HERE! ENTER CODE BELOW ####
+myrobot = robot()
+myrobot = myrobot.move(0.1, 5.0)
+Z = myrobot.sense()
 
 N = 1000
 p = []
 for i in range(N):
     x = robot()
+    x.set_noise(0.05, 0.05, 5.0)
     p.append(x)
-p = [p[i].move(0.1, 5.0) for i in range(N)]
-print p #PLEASE LEAVE THIS HERE FOR GRADING PURPOSES
+
+p2 = []
+for i in range(N):
+    p2.append(p[i].move(0.1, 5.0))
+p = p2
+
+w = []
+#insert code here!
+print w #Please print w for grading purposes.
