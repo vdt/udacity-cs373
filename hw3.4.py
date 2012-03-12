@@ -134,8 +134,43 @@ class robot:
        
     # --------
     # move: 
-    #   
-    
+    #
+
+    def move(self, motion): # Do not change the name of this function
+
+        # ADD CODE HERE
+        steering_angle, distance = motion # alpha, d
+        x = self.x
+        y = self.y
+        orientation = self.orientation # theta
+        vehicle_length = self.length # L
+
+        # beta
+        turning_angle = (distance / vehicle_length) * tan(steering_angle)
+
+        if turning_angle < 0.001:
+            x += distance * cos(orientation)
+            y += distance * sin(orientation)
+        else:
+            # R
+            turning_radius = vehicle_length / turning_angle
+
+            cx = x - sin(orientation) * turning_radius
+            cy = y + cos(orientation) * turning_radius
+
+            x = cx + sin(orientation + turning_angle) * turning_radius
+            y = cy - cos(orientation + turning_angle) * turning_radius
+
+        orientation += turning_angle
+        while (2 * pi) < orientation:
+            orientation -= 2 * pi
+
+        result = robot(length)
+        result.set(x, y, orientation)
+        
+        return result # make sure your move function returns an instance
+                      # of the robot class with the correct coordinates.
+
     # copy your code from the previous exercise
     # and modify it so that it simulates motion noise
     # according to the noise parameters
@@ -145,6 +180,24 @@ class robot:
     # --------
     # sense: 
     #    
+
+    def sense(self): #do not change the name of this function
+        Z = []
+
+        # ENTER CODE HERE
+        # HINT: You will probably need to use the function atan2()
+        for landmark in landmarks:
+            landmark_y, landmark_x = landmark
+            dx = landmark_x - self.x
+            dy = landmark_y - self.y
+            bearing = atan2(dy, dx) - self.orientation
+            while bearing < 0:
+                bearing += 2 * pi
+            while 2 * pi <= bearing:
+                bearing -= 2 * pi
+            Z.append(bearing)
+
+        return Z #Leave this line here. Return vector Z of 4 bearings.
 
     # copy your code from the previous exercise
     # and modify it so that it simulates bearing noise
