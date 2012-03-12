@@ -124,5 +124,5 @@ p = []
 for i in range(N):
     x = robot()
     p.append(x)
-
+p = [p[i].move(0.1, 5.0) for i in range(N)]
 print p #PLEASE LEAVE THIS HERE FOR GRADING PURPOSES
