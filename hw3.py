@@ -28,3 +28,6 @@ print "ignores robot motion"
 print "it likely fails"
 print "none of the above"
 print "answer: ignores robot measurements and it likely fails"
+
+print "4. circular motion"
+print "see hw3.4.py"
