@@ -126,5 +126,6 @@ N = 1000
 p = []
 
 #enter code here
+p = [robot() for i in range(N)]
 
 print len(p)
