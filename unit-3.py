@@ -1,15 +1,12 @@
 #! /usr/bin/env python
 
-# In this exercise, try to write a program that
-# will resample particles according to their weights.
-# Particles with higher weights should be sampled
-# more frequently (in proportion to their weight).
-
-# Don't modify anything below. Please scroll to the 
-# bottom to enter your code.
+# In this exercise, you should implement the
+# resampler shown in the previous video.
 
 from math import *
 import random
+
+
 
 landmarks  = [[20.0, 20.0], [80.0, 80.0], [20.0, 80.0], [80.0, 20.0]]
 world_size = 100.0
@@ -89,6 +86,8 @@ class robot:
             prob *= self.Gaussian(dist, self.sense_noise, measurement[i])
         return prob
     
+    
+    
     def __repr__(self):
         return '[x=%.6s y=%.6s orient=%.6s]' % (str(self.x), str(self.y), str(self.orientation))
 
@@ -111,6 +110,7 @@ def eval(r, p):
 #myrobot = myrobot.move(-pi/2, 10.0)
 #print myrobot.sense()
 
+####   DON'T MODIFY ANYTHING ABOVE HERE! ENTER CODE BELOW ####
 myrobot = robot()
 myrobot = myrobot.move(0.1, 5.0)
 Z = myrobot.sense()
@@ -131,17 +131,7 @@ w = []
 for i in range(N):
     w.append(p[i].measurement_prob(Z))
 
-
-#### DON'T MODIFY ANYTHING ABOVE HERE! ENTER CODE BELOW ####
-# You should make sure that p3 contains a list with particles
-# resampled according to their weights.
-# Also, DO NOT MODIFY p.
-
 p3 = []
-for p3_index in range(len(p)):
-    w_index = 0
-    r = random.random() * sum(w)
-    while w[w_index] < r:
-        r -= w[w_index]
-        w_index += 1
-    p3.append(p[w_index])
+
+p = p3
+print p #please leave this print statement here for grading!
