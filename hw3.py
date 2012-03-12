@@ -19,3 +19,11 @@ print "A = .5 * 3 + .5 * 3 = ", .5 * 3 + .5 * 3
 print "B = .5 * 5 + .5 * 1 = ", .5 * 5 + .5 * 1
 print "C = .5 * 1 + .5 * 5 = ", .5 * 1 + .5 * 5
 print "D = .5 * 3 + .5 * 5 = ", .5 * 3 + .5 * 3
+
+print "3. single particle"
+print "particle filter with N=1 particle.  what happens?"
+print "works fine"
+print "ignores robot measurements"
+print "ignores robot motion"
+print "it likely fails"
+print "none of the above"
