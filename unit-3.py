@@ -1,13 +1,10 @@
 #! /usr/bin/env python
 
-# Now we want to create particles,
-# p[i] = robot(). In this assignment, write
-# code that will assign 1000 such particles
-# to a list.
+# Now we want to simulate robot
+# motion with our particles.
+# Each particle should turn by 0.1
+# and then move by 5. 
 #
-# Your program should print out the length
-# of your list (don't cheat by making an
-# arbitrary list of 1000 elements!)
 #
 # Don't modify the code below. Please enter
 # your code at the bottom.
@@ -124,8 +121,8 @@ def eval(r, p):
 
 N = 1000
 p = []
+for i in range(N):
+    x = robot()
+    p.append(x)
 
-#enter code here
-p = [robot() for i in range(N)]
-
-print len(p)
+print p #PLEASE LEAVE THIS HERE FOR GRADING PURPOSES
