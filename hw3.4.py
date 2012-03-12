@@ -1,6 +1,5 @@
 #! /usr/bin/env python
 
-
 # --------------
 # USER INSTRUCTIONS
 #
@@ -99,6 +98,34 @@ class robot:
     def move(self, motion): # Do not change the name of this function
 
         # ADD CODE HERE
+        steering_angle, distance = motion # alpha, d
+        x = self.x
+        y = self.y
+        orientation = self.orientation # theta
+        vehicle_length = self.length # L
+
+        # beta
+        turning_angle = (distance / vehicle_length) * tan(steering_angle)
+
+        if turning_angle < 0.001:
+            x += distance * cos(orientation)
+            y += distance * sin(orientation)
+        else:
+            # R
+            turning_radius = vehicle_length / turning_angle
+
+            cx = x - sin(orientation) * turning_radius
+            cy = y + cos(orientation) * turning_radius
+
+            x = cx + sin(orientation + turning_angle) * turning_radius
+            y = cy - cos(orientation + turning_angle) * turning_radius
+
+        orientation += turning_angle
+        while (2 * pi) < orientation:
+            orientation -= 2 * pi
+
+        result = robot(length)
+        result.set(x, y, orientation)
         
         return result # make sure your move function returns an instance
                       # of the robot class with the correct coordinates.
@@ -121,23 +148,23 @@ class robot:
 ##       Robot:     [x=39.034 y=7.1270 orient=0.2886]
 ##
 ##
-##length = 20.
-##bearing_noise  = 0.0
-##steering_noise = 0.0
-##distance_noise = 0.0
+length = 20.
+bearing_noise  = 0.0
+steering_noise = 0.0
+distance_noise = 0.0
 ##
-##myrobot = robot(length)
-##myrobot.set(0.0, 0.0, 0.0)
-##myrobot.set_noise(bearing_noise, steering_noise, distance_noise)
+myrobot = robot(length)
+myrobot.set(0.0, 0.0, 0.0)
+myrobot.set_noise(bearing_noise, steering_noise, distance_noise)
 ##
-##motions = [[0.0, 10.0], [pi / 6.0, 10], [0.0, 20.0]]
+motions = [[0.0, 10.0], [pi / 6.0, 10], [0.0, 20.0]]
 ##
-##T = len(motions)
+T = len(motions)
 ##
-##print 'Robot:    ', myrobot
-##for t in range(T):
-##    myrobot = myrobot.move(motions[t])
-##    print 'Robot:    ', myrobot
+print 'Robot:    ', myrobot
+for t in range(T):
+    myrobot = myrobot.move(motions[t])
+    print 'Robot:    ', myrobot
 ##
 ##
 
