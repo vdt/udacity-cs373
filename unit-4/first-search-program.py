@@ -2,7 +2,7 @@
 
 # ----------
 # User Instructions:
-# 
+#
 # Define a function, search() that takes no input
 # and returns a list
 # in the form of [optimal path length, x, y]. For
@@ -40,7 +40,25 @@ def search():
     # ----------------------------------------
     # insert code here and make sure it returns the appropriate result
     # ----------------------------------------
-
-
-
-
+    blocked = [[False if cell == 0 else True for cell in row] for row in grid]
+    init_g_value = 0
+    open = [[init_g_value, init]]
+    while open:
+        open.sort()
+        open.reverse()
+        now = open.pop()
+        now_g_value = now[0]
+        now_coordinates = now[1]
+        now_i, now_j = now_coordinates
+        if now_coordinates == goal:
+            return [now_g_value, now_i, now_j]
+        blocked[now_i][now_j] = True
+        new_g_value = now_g_value + cost
+        for delta_i, delta_j in delta:
+            new_i, new_j = [now_i + delta_i, now_j + delta_j]
+            new = [new_g_value, [new_i, new_j]]
+            if new_i in range(len(grid)) and new_j in range(len(grid[0])) and \
+                    not blocked[new_i][new_j]:
+                open.append(new)
+    return 'fail'
+print search()
