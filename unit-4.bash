@@ -2,3 +2,4 @@
 
 unit-4/first-search-program.py
 unit-4/expansion-grid.py
+unit-4/print-path.py
