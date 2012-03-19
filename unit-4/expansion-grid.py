@@ -36,42 +36,27 @@ cost = 1
 # modify code below
 # ----------------------------------------
 
+def in_grid(i, j):
+    return i in range(len(grid)) and j in range(len(grid[0]))
+
 def search():
-    closed = [[0 for row in range(len(grid[0]))] for col in range(len(grid))]
-    closed[init[0]][init[1]] = 1
+    expand = [[-1 for cell in row] for row in grid]
+    closed = [[False if cell == 0 else True for cell in row] for row in grid]
+    closed[init[0]][init[1]] = True
+    expanded_at = 0
 
-    x = init[0]
-    y = init[1]
-    g = 0
+    open = [init]
 
-    open = [[g, x, y]]
+    while open:
+        open.sort()
+        open.reverse()
+        i, j = open.pop()
+        expand[i][j] = expanded_at
+        expanded_at += 1
 
-    found = False  # flag that is set when search is complete
-    resign = False # flag set if we can't find expand
-
-    while not found and not resign:
-        if len(open) == 0:
-            resign = True
-        else:
-            open.sort()
-            open.reverse()
-            next = open.pop()
-            x = next[1]
-            y = next[2]
-            g = next[0]
-            
-            if x == goal[0] and y == goal[1]:
-                found = True
-            else:
-                for i in range(len(delta)):
-                    x2 = x + delta[i][0]
-                    y2 = y + delta[i][1]
-                    if x2 >= 0 and x2 < len(grid) and y2 >=0 and y2 < len(grid[0]):
-                        if closed[x2][y2] == 0 and grid[x2][y2] == 0:
-                            g2 = g + cost
-                            open.append([g2, x2, y2])
-                            closed[x2][y2] = 1
+        for delta_i, delta_j in delta:
+            new_i, new_j = i + delta_i, j + delta_j
+            if in_grid(new_i, new_j) and not closed[new_i][new_j]:
+                open.append([new_i, new_j])
+                closed[new_i][new_j] = True
     return expand #Leave this line for grading purposes!
-
-
-
