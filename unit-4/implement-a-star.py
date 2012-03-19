@@ -43,51 +43,43 @@ cost = 1
 # modify code below
 # ----------------------------------------
 
+def neighbors(i, j):
+    return [[i + di, j + dj] for di, dj in delta]
+
+def in_grid(i, j):
+    return i in range(len(grid)) and j in range(len(grid[0]))
+
+def valid_cell(i, j, closed):
+    return in_grid(i, j) and not closed[i][j]
+
+def valid_neighbors(i, j, closed):
+    return [[p, q] for p, q in neighbors(i, j) if valid_cell(p, q, closed)]
+
+def recursive_expand(open, closed, expand, expansion_count):
+    open.sort()
+    f, g, [i, j] = open[0]
+    expand[i][j] = expansion_count
+    if [i, j] == goal:
+        return expand
+    else:
+        g_prime = g + cost
+        for p, q in valid_neighbors(i, j, closed):
+            closed[p][q] = True
+            f_prime = g_prime + heuristic[p][q]
+            open.append([f_prime, g_prime, [p, q]])
+        return recursive_expand(open[1:], closed, expand, expansion_count + 1)
+
 def search():
-    closed = [[0 for row in range(len(grid[0]))] for col in range(len(grid))]
-    closed[init[0]][init[1]] = 1
+    closed = [[False if cell == 0 else True for cell in row] for row in grid]
+    closed[init[0]][init[1]] = True
 
-    expand = [[-1 for row in range(len(grid[0]))] for col in range(len(grid))]
-    action = [[-1 for row in range(len(grid[0]))] for col in range(len(grid))]
+    expand = [[-1 for cell in row] for row in grid]
+    expansion_count = 0
 
-
-    x = init[0]
-    y = init[1]
+    i, j = init
     g = 0
+    f = g + heuristic[i][j]
 
-    open = [[g, x, y]]
+    open = [[f, g, init]]
 
-    found = False  # flag that is set when search is complet
-    resign = False # flag set if we can't find expand
-    count = 0
-    
-    while not found and not resign:
-        if len(open) == 0:
-            resign = True
-        else:
-            open.sort()
-            open.reverse()
-            next = open.pop()
-            x = next[1]
-            y = next[2]
-            g = next[0]
-            expand[x][y] = count
-            count += 1
-            
-            if x == goal[0] and y == goal[1]:
-                found = True
-            else:
-                for i in range(len(delta)):
-                    x2 = x + delta[i][0]
-                    y2 = y + delta[i][1]
-                    if x2 >= 0 and x2 < len(grid) and y2 >=0 and y2 < len(grid[0]):
-                        if closed[x2][y2] == 0 and grid[x2][y2] == 0:
-                            g2 = g + cost
-                            open.append([g2, x2, y2])
-                            closed[x2][y2] = 1
-    for i in range(len(expand)):
-        print expand[i]
-    return expand #Leave this line for grading purposes!
-
-
-
+    return recursive_expand(open, closed, expand, expansion_count)
