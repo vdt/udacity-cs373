@@ -79,7 +79,13 @@ def smooth(path, fix,
 
 def gradient_descent(path, newpath, fix, weight_data, weight_smooth):
     temp_path = [[0 for component in step] for step in path]
+    for i in range(len(fix)):
+        if fix[i] == 1:
+            for j in range(len(path[i])):
+                temp_path[i][j] = path[i][j]
     for i in range(len(path)):
+        if fix[i] == 1:
+            continue
         xi = path[i]
         yi = newpath[i]
         yi = data_update(xi, yi, weight_data)
@@ -203,7 +209,9 @@ answer1 = [[0, 0],
            [0, 3],
            [-0.4151464728194156, 2.016311854977891],
            [-0.4194207879552198, 0.9804948340550833]]
-
+print "smooth path = "
+for step in smooth(testpath1, testfix1, 0.5):
+    print step
 testpath2 = [[0, 0], # fix
              [2, 0],
              [4, 0], # fix
