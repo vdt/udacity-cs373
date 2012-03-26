@@ -63,8 +63,57 @@ def smooth(path, weight_data = 0.1, weight_smooth = 0.1, tolerance = 0.00001):
     # 
     # Enter code here
     #
-    
+    newpath = [[0 for component in step] for step in path]
+    for i in range(len(path)):
+        for j in range(len(path[0])):
+            newpath[i][j] = path[i][j]
+    iteration_change = float("inf")
+    while tolerance < iteration_change:
+        temp_path = gradient_descent(path, newpath, weight_data, weight_smooth)
+        iteration_change = total_path_change(newpath, temp_path)
+        for i in range(len(temp_path)):
+            for j in range(len(temp_path[0])):
+                newpath[i][j] = temp_path[i][j]
     return newpath
+
+def gradient_descent(path, newpath, weight_data, weight_smooth):
+    temp_path = [[0 for component in step] for step in path]
+    for i in range(len(path)):
+        xi = path[i]
+        yi = newpath[i]
+        yi = data_update(xi, yi, weight_data)
+        yi_sub_1 = newpath[(i - 1) % len(newpath)]
+        yi_add_1 = newpath[(i + 1) % len(newpath)]
+        temp_path[i] = smooth_update(xi, yi, weight_smooth, yi_sub_1, yi_add_1)
+        change_vector = [(j - k) for j, k in zip(newpath[i], temp_path[i])]
+    return temp_path
+
+def data_update(xi, yi, weight_data):
+    result = vector_subtract(xi, yi)
+    result = multiply_scalar_by_vector(weight_data, result)
+    result = vector_add(yi, result)
+    return result
+
+def smooth_update(xi, yi, weight_smooth, yi_sub_1, yi_add_1):
+    result = vector_add(yi_add_1, yi_sub_1)
+    result = vector_subtract(result, multiply_scalar_by_vector(2, yi))
+    result = multiply_scalar_by_vector(weight_smooth, result)
+    result = vector_add(yi, result)
+    return result
+
+def vector_subtract(j, k):
+    return [ji - ki for ji, ki in zip(j, k)]
+def multiply_scalar_by_vector(scalar, vector):
+    return [scalar * component for component in vector]
+def vector_add(j, k):
+    return [ji + ki for ji, ki in zip(j, k)]
+
+def total_path_change(newpath, temp_path):
+    total_change = 0
+    for i in range(len(newpath)):
+        for j in range(len(newpath[0])):
+            total_change += abs(newpath[i][j] - temp_path[i][j])
+    return total_change
 
 # thank you - EnTerr - for posting this on our discussion forum
 
@@ -217,6 +266,3 @@ answer2 = [[1.239080543767428, 0.5047204351187283],
 ##    [1.000, 1.000] -> [0.908, 0.908]
 
 # solution_check(smooth(testpath1), answer1)
-
-
-
