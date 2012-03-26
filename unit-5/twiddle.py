@@ -176,8 +176,28 @@ def twiddle(tol = 0.2): #Make this tolerance bigger if you are timing out!
     # -------------
     # Add code here
     # -------------
-    
+    params = [0, 0, 0]
+    dp = [1, 1, 1]
+    best_error = float("inf")
+    twiddle_number = 0
+    while tol <= sum(dp):
+        twiddle_number += 1
+        for i in range(len(params)):
+            params[i] += dp[i]
+            err = run(params)
+            if err < best_error:
+                best_error = err
+                dp[i] *= 1.1
+            else:
+                params[i] -= 2 * dp[i]
+                err = run(params)
+                if err < best_error:
+                    best_error = err
+                    dp[i] *= 1.1
+                else:
+                    params[i] += dp[i]
+                    dp[i] *= 0.9
+        print "Twiddle # ", twiddle_number, params, " -> ", best_error
     return run(params)
 
-
-
+print twiddle(0.001)
