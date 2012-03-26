@@ -3,3 +3,4 @@
 hw5/missing-parameters.py
 hw5/cyclic-smoothing.py
 hw5/constrained-smoothing.py
+hw5/racetrack-control.py
