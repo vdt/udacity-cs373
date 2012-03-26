@@ -146,6 +146,12 @@ def run(param):
     N = 100
     #
     # Add Code Here
-    # 
+    #
+    distance = speed
+    for i in range(N):
+        cross_track_error = myrobot.y
+        steering = -param * cross_track_error
+        myrobot = myrobot.move(steering, distance)
+        print myrobot, steering
 
 run(0.1) # call function with parameter tau of 0.1 and print results
