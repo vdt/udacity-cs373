@@ -34,7 +34,7 @@ path = [[0, 0],
 # smooth coordinates
 #
 
-def smooth(path, weight_data = 0.5, weight_smooth = 0.1):
+def smooth(path, weight_data = 0.5, weight_smooth = 0.1, tolerance=0.000001):
 
     # Make a deep copy of path into newpath
     newpath = [[0 for col in range(len(path[0]))] for row in range(len(path))]
@@ -44,12 +44,60 @@ def smooth(path, weight_data = 0.5, weight_smooth = 0.1):
 
 
     #### ENTER CODE BELOW THIS LINE ###
-    
-    
-    
-    return newpath # Leave this line for the grader!
+    iteration_change = float("inf")
+    while tolerance < iteration_change:
+        temp_path = gradient_descent(path, newpath, weight_data, weight_smooth)
+        iteration_change = total_path_change(newpath, temp_path)
+        for i in range(len(temp_path)):
+            for j in range(len(temp_path[0])):
+                newpath[i][j] = temp_path[i][j]
+    return newpath
 
-# feel free to leave this and the following lines if you want to print.
+def gradient_descent(path, newpath, weight_data, weight_smooth):
+    temp_path = [[0 for component in step] for step in path]
+    for i in range(len(path[0])):
+        temp_path[0][i] = path[0][i]
+    for i in range(len(path[-1])):
+        temp_path[-1][i] = path[-1][i]
+    for i in range(len(path)):
+        if i == 0 or i == len(path) - 1:
+            continue
+        xi = path[i]
+        yi = newpath[i]
+        yi = data_update(xi, yi, weight_data)
+        yi_sub_1 = newpath[i - 1]
+        yi_add_1 = newpath[i + 1]
+        temp_path[i] = smooth_update(xi, yi, weight_smooth, yi_sub_1, yi_add_1)
+        change_vector = [(j - k) for j, k in zip(newpath[i], temp_path[i])]
+    return temp_path
+
+def data_update(xi, yi, weight_data):
+    result = vector_subtract(xi, yi)
+    result = multiply_scalar_by_vector(weight_data, result)
+    result = vector_add(yi, result)
+    return result
+
+def smooth_update(xi, yi, weight_smooth, yi_sub_1, yi_add_1):
+    result = vector_add(yi_add_1, yi_sub_1)
+    result = vector_subtract(result, multiply_scalar_by_vector(2, yi))
+    result = multiply_scalar_by_vector(weight_smooth, result)
+    result = vector_add(yi, result)
+    return result
+
+def vector_subtract(j, k):
+    return [ji - ki for ji, ki in zip(j, k)]
+def multiply_scalar_by_vector(scalar, vector):
+    return [scalar * component for component in vector]
+def vector_add(j, k):
+    return [ji + ki for ji, ki in zip(j, k)]
+
+def total_path_change(newpath, temp_path):
+    total_change = 0
+    for i in range(len(newpath)):
+        for j in range(len(newpath[0])):
+            total_change += abs(newpath[i][j] - temp_path[i][j])
+    return total_change
+
 newpath = smooth(path)
 
 # thank you - EnTerr - for posting this on our discussion forum
