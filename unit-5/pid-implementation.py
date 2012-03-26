@@ -154,29 +154,18 @@ def run(param1, param2, param3):
     #
     # Enter code here
     #
-    time_step = 1.0
-    distance = speed
-    cross_track_error = myrobot.y
-    cross_track_error_integral = 0.0
+    int_crosstrack_error = 0.0
+    crosstrack_error = myrobot.y
+
     for i in range(N):
-        previous_cross_track_error = cross_track_error
-        cross_track_error = myrobot.y
-        cross_track_error_derivative = \
-            (cross_track_error - previous_cross_track_error) / time_step
-        cross_track_error_integral += cross_track_error
-
-        proportional = -param1 * cross_track_error
-        integral = -param3 * cross_track_error_integral
-        derivative = -param2 * cross_track_error_derivative
-
-        steering = proportional + integral + derivative
-
-        myrobot = myrobot.move(steering, distance)
-        print myrobot, steering
+        diff_crosstrack_error = myrobot.y - crosstrack_error
+        crosstrack_error = myrobot.y
+        int_crosstrack_error += crosstrack_error
+        steer = - param1 * crosstrack_error \
+            - param2 * diff_crosstrack_error \
+            - param3 * int_crosstrack_error
+        myrobot = myrobot.move(steer, speed)
+        print myrobot, steer
 
 # Call your function with parameters of (0.2, 3.0, and 0.004)
 run(0.2, 3.0, 0.004)
-
-
-
-
