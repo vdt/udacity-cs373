@@ -68,7 +68,7 @@ def smooth(path, fix,
         for j in range(len(path[0])):
             newpath[i][j] = path[i][j]
     iteration_change = float("inf")
-    while tolerance < iteration_change:
+    while tolerance <= iteration_change:
         temp_path = gradient_descent(path, newpath, fix,
                                      weight_data, weight_smooth)
         iteration_change = total_path_change(newpath, temp_path)
@@ -86,13 +86,26 @@ def gradient_descent(path, newpath, fix, weight_data, weight_smooth):
     for i in range(len(path)):
         if fix[i] == 1:
             continue
+
         xi = path[i]
         yi = newpath[i]
+
         yi = data_update(xi, yi, weight_data)
+
         yi_sub_1 = newpath[(i - 1) % len(newpath)]
         yi_add_1 = newpath[(i + 1) % len(newpath)]
-        temp_path[i] = smooth_update(xi, yi, weight_smooth, yi_sub_1, yi_add_1)
-        change_vector = [(j - k) for j, k in zip(newpath[i], temp_path[i])]
+
+        yi = smooth_update(yi, weight_smooth, yi_sub_1, yi_add_1)
+
+        yi_sub_2 = newpath[(i - 2) % len(newpath)]
+        yi_add_2 = newpath[(i + 2) % len(newpath)]
+
+        yi = vector_update(yi,
+                           yi_sub_1, yi_sub_2,
+                           yi_add_1, yi_add_2,
+                           weight_smooth)
+
+        temp_path[i] = yi
     return temp_path
 
 def data_update(xi, yi, weight_data):
@@ -101,10 +114,39 @@ def data_update(xi, yi, weight_data):
     result = vector_add(yi, result)
     return result
 
-def smooth_update(xi, yi, weight_smooth, yi_sub_1, yi_add_1):
+def smooth_update(yi, weight_smooth, yi_sub_1, yi_add_1):
     result = vector_add(yi_add_1, yi_sub_1)
     result = vector_subtract(result, multiply_scalar_by_vector(2, yi))
     result = multiply_scalar_by_vector(weight_smooth, result)
+    result = vector_add(yi, result)
+    return result
+
+def vector_update(yi,
+                  yi_sub_1, yi_sub_2,
+                  yi_add_1, yi_add_2,
+                  smooth_weight):
+    smooth_weight_each = smooth_weight / 2.0
+    result = vector_update_behind(yi,
+                                  yi_sub_1, yi_sub_2,
+                                  smooth_weight_each)
+    result = vector_update_ahead(result,
+                                 yi_add_1, yi_add_2,
+                                 smooth_weight_each)
+    return result
+
+def vector_update_behind(yi, yi_sub_1, yi_sub_2, weight):
+    result = vector_update_each(yi, yi_sub_1, yi_sub_2, weight)
+    return result
+
+def vector_update_ahead(yi, yi_add_1, yi_add_2, weight):
+    result = vector_update_behind(yi, yi_add_1, yi_add_2, weight)
+    return result
+
+def vector_update_each(yi, yi_1, yi_2, weight):
+    result = multiply_scalar_by_vector(2, yi_1)
+    result = vector_subtract(result, yi_2)
+    result = vector_subtract(result, yi)
+    result = multiply_scalar_by_vector(weight, result)
     result = vector_add(yi, result)
     return result
 
@@ -209,9 +251,6 @@ answer1 = [[0, 0],
            [0, 3],
            [-0.4151464728194156, 2.016311854977891],
            [-0.4194207879552198, 0.9804948340550833]]
-print "smooth path = "
-for step in smooth(testpath1, testfix1, 0.5):
-    print step
 testpath2 = [[0, 0], # fix
              [2, 0],
              [4, 0], # fix
@@ -230,5 +269,4 @@ answer2 = [[0, 0],
            [0, 4],
            [-0.7015438099112995, 1.9883232808252207]]
 #solution_check(smooth(testpath1, testfix1), answer1)
-
-
+#solution_check(smooth(testpath2, testfix2), answer2)
