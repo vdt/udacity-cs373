@@ -201,18 +201,22 @@ def twiddle(tol = 0.2): #Make this tolerance bigger if you are timing out!
 
 tp, td, ti = twiddle(0.0001)
 
+print
 params = [tp, td, ti]
 print "params = ", params
 run(params, True)
 
+print
 params = [0, td, ti]
 print "params = ", params
 run(params, True)
 
+print
 params = [tp, 0, ti]
 print "params = ", params
 run(params, True)
 
+print
 params = [tp, td, 0]
 print "params = ", params
 run(params, True)

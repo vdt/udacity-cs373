@@ -144,9 +144,25 @@ class robot:
         #
         # Add code here
         #
-        #            
+        #
+        cte = 0.0
+        x, y, orientation = self.x, self.y, self.orientation
+        if x < radius:
+            dx = x - radius
+            dy = y - radius
+            cte = abs(sqrt((dx ** 2) + (dy ** 2)) - radius)
+        elif radius < x and x < 3 * radius:
+            if (0 <= orientation and orientation < pi/2) or \
+                    (3 * pi / 2 < orientation and orientation < 2 * pi):
+                cte = y - (2 * radius)
+            else:
+                cte = -y
+        else:
+            dx = x - 3 * radius
+            dy = y - radius
+            cte = abs(sqrt((dx ** 2) + (dy ** 2)) - radius)
         return cte
-    
+
 ############## ONLY ADD / MODIFY CODE ABOVE THIS LINE ####################
 
 

@@ -265,4 +265,4 @@ answer2 = [[1.239080543767428, 0.5047204351187283],
 ##    [0.000, 1.000] -> [0.505, 1.239]
 ##    [1.000, 1.000] -> [0.908, 0.908]
 
-# solution_check(smooth(testpath1), answer1)
+#solution_check(smooth(testpath1), answer1)
