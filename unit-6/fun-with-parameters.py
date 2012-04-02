@@ -527,7 +527,7 @@ def run(grid, goal, spath, params, printflag = False, speed = 0.1, timeout = 100
         Z = myrobot.sense()
         filter.sense(Z)
 
-        if not myrobot.check_collision(grid):
+        if printflag and not myrobot.check_collision(grid):
             print '##### Collision ####'
 
         err += (cte ** 2)
@@ -593,17 +593,23 @@ print main(grid, init, goal, steering_noise, distance_noise, measurement_noise,
            weight_data, weight_smooth, p_gain, d_gain)
 
 def main_runner(params):
+    weight_data, weight_smooth, p_gain, d_gain = params
     total_runs = 0
     enough_successful_runs = 10
     successful_run_count = 0
     total_steps = 0
     goal_check = True
-    while successful_run_count < enough_successful_runs and goal_check:
-        print "total runs = ", total_runs
+
+    path = plan(grid, init, goal)
+    path.astar()
+    path.smooth(weight_data, weight_smooth)
+    while goal_check and successful_run_count < enough_successful_runs:
         total_runs += 1
-        goal_check, collisions, steps = main(grid, init, goal,
-                                             steering_noise, distance_noise,
-                                             measurement_noise, *params)
+        goal_check, collisions, steps = run(grid, goal, path.spath,
+                                            [p_gain, d_gain],
+                                            False,
+                                            0.1,
+                                            200)
         if goal_check:
             successful_run_count += 1
             total_steps += steps
@@ -619,6 +625,7 @@ def twiddle(tol = 0.2): #Make this tolerance bigger if you are timing out!
     best_steps = float("inf")
     twiddle_number = 0
     while tol <= sum([abs(x) for x in dp]):
+        updated = False
         twiddle_number += 1
         for i in range(len(params)):
             params[i] += dp[i]
@@ -626,16 +633,20 @@ def twiddle(tol = 0.2): #Make this tolerance bigger if you are timing out!
             if goal_check and steps < best_steps:
                 best_steps = steps
                 dp[i] *= 1.1
+                updated = True
             else:
                 params[i] -= 2 * dp[i]
                 goal_check, steps = main_runner(params)
                 if goal_check and steps < best_steps:
                     best_steps = steps
                     dp[i] *= 1.1
+                    updated = True
                 else:
                     params[i] += dp[i]
                     dp[i] *= 0.9
-        print "\nTwiddle # ", twiddle_number, params, " -> ", best_steps, "\n"
+        if updated:
+            print "\nTwiddle # ", twiddle_number, params, " ->"
+            print "\t", best_steps, "\n"
     return main_runner(params)
 
 print twiddle(0.001)
