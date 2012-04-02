@@ -491,8 +491,37 @@ def run(grid, goal, spath, params, printflag = False, speed = 0.1, timeout = 100
         # start with the present robot estimate
         estimate = filter.get_position()
 
+
         ### ENTER CODE HERE
-        
+
+        x1, y1 = spath[index]
+        x2, y2 = spath[index + 1]
+
+        step = spath[index]
+        x, y, orientation = estimate
+        delta_x = x2 - x1
+        delta_y = y2 - y1
+
+        Rx = x - x1
+        Ry = y - y1
+
+        u = (Rx * delta_x + Ry * delta_y) / (delta_x ** 2 + delta_y ** 2)
+
+        if u > 1:
+            index += 1
+            if len(spath) <= index + 1:
+                print "index is too big for another loop"
+
+            x1, y1 = spath[index]
+            x2, y2 = spath[index + 1]
+
+            Rx = x - x1
+            Ry = y - y1
+
+            delta_x = x2 - x1
+            delta_y = y2 - y1
+
+        cte = (Ry * delta_x - Rx * delta_y) / (delta_x ** 2 + delta_y ** 2)
 
         # ----------------------------------------
 
