@@ -329,8 +329,32 @@ def doit(initial_pos, move1, move2):
     # Add your code here.
     #
     #
+    omega = matrix()
+    omega.zero(3)
+    xi = matrix([[0], [0], [0]])
+
+    # initial_position:
+    omega += matrix([[1, 0, 0],
+                     [0, 0, 0],
+                     [0, 0, 0]])
+    xi += matrix([[initial_pos],[0],[0]])
+
+    # move1
+    omega += matrix([[1, -1, 0],
+                     [-1, 1, 0],
+                     [0, 0, 0]])
+    xi += matrix([[-move1],[move1],[0]])
+
+    # move2
+    omega += matrix([[0, 0, 0],
+                     [0, 1, -1],
+                     [0, -1, 1]])
+    xi += matrix([[0],[-move2],[move2]])
+
+    omega.show("Omega:\t")
+    xi.show("Xi:\t")
+    mu = omega.inverse() * xi
+    mu.show("Result:\t")
     return mu
 
 doit(-3, 5, 3)
-
-
