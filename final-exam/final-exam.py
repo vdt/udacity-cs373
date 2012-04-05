@@ -44,8 +44,35 @@ world_size = 0.0
 for row in world:
     for cell in row:
         world_size += 1.0
-for row in world:
+p = [[1.0 / world_size for cell in row] for row in world]
+for row in p:
     for cell in row:
-        print 1.0/world_size,
+        print "%0.03f" % cell,
     print
+print
 
+print "question 5"
+print 'now the robot senses "red" but has a measurement'
+print "error probability of 0.2. Update your probabilities."
+p = [[0.8 if cell == red else 0.2 for cell in row] for row in world]
+p_sum = 0.0
+for row in p:
+    for cell in row:
+        p_sum += cell
+p = [[cell/p_sum for cell in row] for row in p]
+for row in p:
+    for cell in row:
+        print "%0.03f" % cell,
+    print
+print
+
+print "question 6"
+print "it now moves north by one step (the world is not cyclic -"
+print "so if the robot hits a wall, it just won't move). update"
+print "your probabilities."
+moved_north_world = [[p[0][0] + p[1][0], p[0][1] + p[1][1]], [0, 0]]
+for row in moved_north_world:
+    for cell in row:
+        print "%0.03f" % cell,
+    print
+print
