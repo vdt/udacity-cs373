@@ -76,3 +76,23 @@ for row in moved_north_world:
         print "%0.03f" % cell,
     print
 print
+
+print "question 7"
+print 'it now senses "red" again.  update your probabilities.'
+p = moved_north_world
+for row_index in range(len(world)):
+    for column_index in range(len(world)):
+        if world[row_index][column_index] == red:
+            p[row_index][column_index] *= 0.8
+        else:
+            p[row_index][column_index] *= 0.2
+p_sum = 0.0
+for row in p:
+    for cell in row:
+        p_sum += cell
+p = [[cell/p_sum for cell in row] for row in p]
+for row in p:
+    for cell in row:
+        print "%0.03f" % cell,
+    print
+print
