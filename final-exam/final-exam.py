@@ -129,6 +129,50 @@ def kalman_predict(mean1, var1, mean2, var2):
     new_var = var1 + var2
     return [new_mean, new_var]
 print kalman_predict(1., 1., 1., 1.)
+print "q12"
 print kalman_predict(1., 1., 5., 1.)
+print "q13"
 print kalman_predict(1., 1., 5., 4.)
+print
+
+print "q5: particle filters"
+print "q14"
+print "a robot lives in the following non-cyclic environment"
+print "with 4 states"
+print "[[green, green], [red, green]]"
+print "challenge"
+print "in global localization, suppose we have 12"
+print "particles.  what is the probability that all cells have at"
+print "least one particle, for the initial uniform sample?"
+prob_1_empty = ((3./4.)**12.)*4.
+prob_2_empty = ((2./4.)**12.)*4.
+prob_3_empty = ((1./4.)**12.)*4.
+prob_4_empty = 0.
+prob_0_empty = 1 - prob_1_empty - prob_2_empty - prob_3_empty - prob_4_empty
+print "prob_0_empty = ", prob_0_empty
+print "q15"
+print "assume each cell has exactly 3.  what is the normalized"
+print 'sum of all the weights in each cell, if we observe "red"'
+print "and assume a 0.2 measurement error probability?"
+red = "red"
+green = "green"
+world = [[green, green], [red, green]]
+measurement_error = 0.2
+measurement_correct = 1 - measurement_error
+measurement = red
+world_size = 0.0
+for row in world:
+    for cell in row:
+        world_size += 1
+p = [[measurement_error/world_size if cell != measurement \
+          else measurement_correct/world_size for cell in row] for row in world]
+p_sum = 0.0
+for row in p:
+    for cell in row:
+        p_sum += cell
+p_normalized = [[cell/p_sum for cell in row] for row in p]
+for row in p_normalized:
+    for cell in row:
+        print "%0.03f" % cell,
+    print
 print
