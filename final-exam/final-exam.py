@@ -120,3 +120,15 @@ print sigma_mu_update(1., 1., 5., 1.)
 print "question 10"
 print sigma_mu_update(1., 1., 5., 4.)
 print
+
+print "question 11"
+print "exactly the same question as before, but replacing"
+print "measurement step with a motion step."
+def kalman_predict(mean1, var1, mean2, var2):
+    new_mean = mean1 + mean2
+    new_var = var1 + var2
+    return [new_mean, new_var]
+print kalman_predict(1., 1., 1., 1.)
+print kalman_predict(1., 1., 5., 1.)
+print kalman_predict(1., 1., 5., 4.)
+print
