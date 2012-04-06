@@ -96,3 +96,27 @@ for row in p:
         print "%0.03f" % cell,
     print
 print
+
+print "question 8"
+print "Q3:1-d kalman filter"
+print "compute, for the following two Gaussians, the result of applying bayes"
+print "rule. Think of gaussian 1 as the prior, and gaussian 2 as the"
+print "measurement probability."
+print "gaussian 1, guassian 2, result"
+print "mu sigma^2, mu sigma^2, mu sigma^2"
+def mu_prime(mu, sigma_square, nu, r_square):
+    return (r_square * mu + sigma_square * nu)/(sigma_square + r_square)
+
+def sigma_square_prime(sigma_square, r_square):
+    return 1./(1./sigma_square + 1./r_square)
+
+def sigma_mu_update(mean1, var1, mean2, var2):
+    new_mean = mu_prime(mean1, var1, mean2, var2)
+    new_var = sigma_square_prime(var1, var2)
+    return [new_mean, new_var]
+print sigma_mu_update(1., 1., 1., 1.)
+print "question 9"
+print sigma_mu_update(1., 1., 5., 1.)
+print "question 10"
+print sigma_mu_update(1., 1., 5., 4.)
+print
