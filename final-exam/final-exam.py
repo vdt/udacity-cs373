@@ -176,3 +176,46 @@ for row in p_normalized:
         print "%0.03f" % cell,
     print
 print
+print "q16"
+print "assume each cell has 3 particles.  the robot moves north,"
+print "but the world is not cyclic (so if the robot hits a wall, it"
+print "just won't move).  what is the number of particles in each"
+print "cell after motion? assume we use each particle once,"
+print "ignore resampling, and assume motion is noise-free"
+print [[6, 6], [0, 0]]
+print
+
+print "q6: a* planning (challenge)"
+print "q17"
+print "for the following planning problem, there are nodes that A* must expand"
+print "and other nodes A* will never expand (assuming the heuristic is"
+print "admissible).  assume only up/down/left/right expansion, no diagonal"
+print "motion."
+world = []
+world_row_count = 4
+world_column_count = 4
+for row in range(world_row_count):
+    world.append([])
+    for column in range(world_column_count):
+        world[row].append(' ')
+world[0][0] = 's'
+world[3][3] = 'g'
+for row in world:
+    print row
+print "must expand:"
+must_expand = [[cell for cell in row] for row in world]
+for row in range(4):
+    must_expand[row][0] = '*'
+for column in range(4):
+    must_expand[3][column] = '*'
+for row in must_expand:
+    print row
+print "q18"
+print "never expand"
+never_expand = [[cell for cell in row] for row in world]
+for row in range(2):
+    for column in range(2, 4):
+        never_expand[row][column] = '*'
+never_expand[2][3] = '*'
+for row in never_expand:
+    print row
