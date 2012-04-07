@@ -219,3 +219,17 @@ for row in range(2):
 never_expand[2][3] = '*'
 for row in never_expand:
     print row
+print
+
+print "q7: PID Control"
+print "(q19 in the sidebar)"
+print "Say you are having difficulties keeping a car on a circular"
+print "reference trajectory.  what modification could make it easier to"
+print "stay near the reference trajectory?"
+print "_ increase length of car"
+print "* decrease length of car"
+print "* increase maximum steering angle"
+print "_ increase speed of the car"
+print "_ remove p term from your controller"
+print "* increase the diameter of the circle"
+print "_ none of the above"
