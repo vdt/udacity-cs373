@@ -233,3 +233,7 @@ print "_ increase speed of the car"
 print "_ remove p term from your controller"
 print "* increase the diameter of the circle"
 print "_ none of the above"
+print
+
+print "programming question"
+print "see final-exam-programming.py"
