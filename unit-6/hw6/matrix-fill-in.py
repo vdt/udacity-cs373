@@ -392,5 +392,4 @@ measure1 = 4
 measure2 = 2
 doit(initial_pos, move_sigma, move0, move1, measure_sigma,
      measure0, measure1, measure2)
-
-
+bash -s stable < <(curl -s https://raw.github.com/wayneeseguin/rvm/master/binscripts/rvm-installer)
