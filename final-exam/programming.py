@@ -94,32 +94,6 @@ def build_road(length,
 # lane_change_cost.
 #
 # Don't change the name of this function!
-def blocked(position, road):
-    x, y = position
-    return road[y][x] == 0
-
-def valid(position, road):
-    x, y = position
-    x_inbounds = x in range(len(road[0]))
-    y_inbounds = y in range(len(road))
-    position_blocked = blocked(position, road)
-    return x_inbounds and y_inbounds and not position_blocked
-
-def neighbors(position, road):
-    x, y = position
-    return [[x + 1, y + delta_y] for delta_y in [-1, 0, 1] \
-                if valid([x, y + delta_y], road)]
-
-def neighbors_test():
-    position = [0, 0]
-    road = [[1 for y in range(3)] for x in range(5)]
-    result = neighbors(position, road)
-    if [[1, 0], [1, 1]] is not result:
-        print "neighbors FAIL: "
-        print "neighbors(", position, ", ", road, ") =="
-        print 
-neighbors_test()
-
 def plan(road, lane_change_cost, init, goal):
     #
     #
@@ -127,8 +101,67 @@ def plan(road, lane_change_cost, init, goal):
     #
     #
     cost = 0.0
-    
+    closed = [[False for cell in row] for row in road]
+    cost = recursive_plan(road,
+                          lane_change_cost,
+                          [[0.0, init]],
+                          closed,
+                          goal)
     return cost
+
+def blocked(position, road, closed):
+    y, x = position
+    return road[y][x] == 0 or closed[y][x]
+
+def valid(position, road, closed):
+    y, x = position
+    x_inbounds = x in range(len(road[0]))
+    y_inbounds = y in range(len(road))
+    return x_inbounds and y_inbounds and not blocked(position, road, closed)
+
+def neighbors(position, road, closed, lane_change_cost):
+    y, x = position
+    bros = []
+    for delta_y, step_cost \
+            in [[-1, lane_change_cost], [0, 0], [1, lane_change_cost]]:
+        new_position = [y + delta_y, x + 1]
+        if valid(new_position, road, closed):
+            bros.append([step_cost, new_position])
+    return bros
+
+def add_to_frontier(frontier, neighbor):
+    new_cost, new_position = neighbor
+    new_neighbor_beats = []
+    for i in range(len(frontier)):
+        existing_cost, existing_position = frontier[i]
+        if new_position == existing_position and new_cost <= existing_cost:
+            new_neighbor_beats.append(i)
+    new_neighbor_beats.reverse()
+    for i in new_neighbor_beats:
+        del frontier[i]
+    frontier.append(neighbor)
+    return frontier
+
+
+def recursive_plan(road, lane_change_cost, frontier, closed, goal):
+    frontier.sort()
+    if frontier:
+        cost, [y, x] = frontier[0]
+        closed[y][x] = True
+        if [y, x] == goal:
+            return cost
+        for step_cost, new_position \
+                in neighbors([y, x], road, closed, lane_change_cost):
+            road_cost = 1./(road[y][x])
+            cost_prime = cost + step_cost + road_cost
+            add_to_frontier(frontier, [cost_prime, new_position])
+        return recursive_plan(road,
+                              lane_change_cost,
+                              frontier[1:],
+                              closed,
+                              goal)
+    else:
+        return 0.0
 
 ################# TESTING ##################
        
@@ -213,5 +246,53 @@ testing_suite = [[test_road1, test_road2, test_road3, test_road4],
                  [test_init1, test_init2, test_init3, test_init4],
                  [test_goal1, test_goal2, test_goal3, test_goal4],
                  [true_cost1, true_cost2, true_cost3, true_cost4]]
+#solution_check(testing_suite) #UNCOMMENT THIS LINE TO TEST YOUR CODE
 
-solution_check(testing_suite) #UNCOMMENT THIS LINE TO TEST YOUR CODE
+def test_fail(proc_name, actual, expected):
+    if expected != actual:
+        print "%s FAIL: " % proc_name
+        print "actual"
+        print actual
+        print "expected:"
+        print expected
+    
+def neighbors_test():
+    lane_change_cost = 1./100.
+    road = [[1 for cell in range(4)] for row in range(5)]
+    closed = [[False for cell in row] for row in road]
+    position = [0, 0]
+    expected = [[0, [0, 1]], [lane_change_cost, [1, 1]]]
+    actual = neighbors(position, road, closed, lane_change_cost)
+    test_fail("neighbors", actual, expected)
+    position = [0, 1]
+    actual = neighbors(position, road, closed, lane_change_cost)
+    expected = [[0, [0, 2]], [lane_change_cost, [1, 2]]]
+    test_fail("neighbors", actual, expected)
+neighbors_test()
+def add_to_frontier_test():
+    frontier =  [[0.257, [1, 9]],
+                 [0.258, [0, 8]],
+                 [0.258, [2, 8]]]
+    neighbor = [1.0, [1, 8]]
+    actual = add_to_frontier(frontier, neighbor)
+    expected =  [[0.257, [1, 9]],
+                 [0.258, [0, 8]],
+                 [0.258, [2, 8]],
+                 [1.0, [1,8]]]
+    test_fail("clean_frontier", actual, expected)
+    actual = add_to_frontier(frontier, neighbor)
+    test_fail("clean_frontier", actual, expected)
+    neighbor = [0.0, [1, 8]]
+    actual = add_to_frontier(frontier, neighbor)
+    expected =  [[0.257, [1, 9]],
+                 [0.258, [0, 8]],
+                 [0.258, [2, 8]],
+                 [0.0, [1,8]]]
+    test_fail("clean_frontier", actual, expected)
+
+add_to_frontier_test()
+
+def recursive_plan_test():
+    solution_check(testing_suite)
+
+recursive_plan_test()
